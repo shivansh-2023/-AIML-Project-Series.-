@@ -1,0 +1,64 @@
+import random
+
+def greet():
+    """Greets the user and introduces the chatbot."""
+    greetings = ["Hello there!", "Hi! How can I help you today?", "Hey, what's up?"]
+    return random.choice(greetings)
+
+def farewell():
+    """Bids farewell to the user."""
+    farewells = ["Goodbye!", "Have a great day!", "See you next time!"]
+    return random.choice(farewells)
+
+def handle_question(question):
+    """Responds to basic questions."""
+    responses = {
+        "what is your name": "My name is Bard.",
+        "what can you do": "I can answer simple questions and have conversations.",
+        "how are you": "I'm doing well, thanks for asking!",
+        "what is your favorite color": "I don't have a favorite color, but I like blue and green.",
+        "what is the weather like today": "It's currently sunny and warm in my digital world.",
+    }
+    return responses.get(question.lower(), "I'm not sure I understand that question.")
+
+def ask_questions():
+    """Asks the user a series of questions."""
+    questions = ["What's your name?", "What do you like to do in your free time?", "What's your favorite food?"]
+    for question in questions:
+        answer = input(question + " ")
+        print("That's cool! hii " + answer )
+
+def remember_context(context):
+    """Stores previous interactions for context."""
+    global conversation_history
+    conversation_history = context
+
+def recall_context():
+    """Retrieves previous interactions for context."""
+    global conversation_history
+    return conversation_history
+
+def main():
+    """Starts the chatbot conversation."""
+    print(greet())
+    conversation_history = []
+    while True:
+        user_input = input("You: ")
+        conversation_history.append(user_input)
+
+        if user_input.lower() in ["goodbye", "bye", "quit"]:
+            print(farewell())
+            break
+
+        elif user_input.lower().startswith("what") or user_input.lower().startswith("how"):
+            response = handle_question(user_input)
+            print("Bard:", response)
+
+        else:
+            try:
+                ask_questions()
+            except ValueError:
+                print("Bard: I'm not sure I understand. Could you rephrase?")
+
+if __name__ == "__main__":
+    main()
