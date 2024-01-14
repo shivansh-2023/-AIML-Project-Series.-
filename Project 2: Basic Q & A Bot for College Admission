@@ -36,8 +36,6 @@ def handle_question(question):
                 pass  # Handle cases where personalization isn't possible
             return response
 
-   # return "I'm not sure I understand that question. Could you rephrase it or try asking something different?"
-
 def personalize_response(response, conversation_history, user_info):
     # Implement logic to tailor responses based on previous interactions and user information
     if "name" in user_info:
